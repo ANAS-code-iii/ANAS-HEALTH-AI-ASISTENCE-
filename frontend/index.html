@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shastho Sathi – Health Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="emergency-bar">
+    🚑 Emergency in Bangladesh? Call <strong>999</strong> or go to the nearest hospital now.
+  </div>
+
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">✚</span>
+      <div>
+        <h1>ANAS</h1>
+        <p>ANAS · AI health information assistant</p>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab active" role="tab" data-tab="chat" aria-selected="true">💬 Ask AI</button>
+      <button class="tab" role="tab" data-tab="check" aria-selected="false">🩺 Disease check</button>
+      <button class="tab" role="tab" data-tab="report" aria-selected="false">🧠 Health report</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. CHAT -->
+    <section id="tab-chat" class="panel active" role="tabpanel">
+      <div class="card chat-card">
+        <div id="messages" class="messages" aria-live="polite">
+          <div class="msg bot">
+            <div class="bubble">Hello! Ask me any health question in English or বাংলা. I give general information, not a diagnosis.</div>
+          </div>
+        </div>
+        <div class="chips" id="chips">
+          <button class="chip">What are early signs of diabetes?</button>
+          <button class="chip">What should I do if I have dengue fever?</button>
+          <button class="chip">How can I lower high blood pressure?</button>
+        </div>
+        <div id="file-list" class="file-list" hidden></div>
+        <form id="chat-form" class="composer">
+          <input type="file" id="file-input" hidden multiple accept="image/*,.pdf,.docx,.txt,.csv">
+          <button type="button" class="btn attach-btn" id="attach-btn" aria-label="Attach image or document" title="Attach image or document">📎</button>
+          <textarea id="chat-input" rows="1" maxlength="4000" placeholder="Ask a health question or attach a report / photo…"></textarea>
+          <button type="submit" class="btn primary" id="chat-send">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 2. ML DISEASE CHECK -->
+    <section id="tab-check" class="panel" role="tabpanel">
+      <div class="card">
+        <h2>Quick disease screening</h2>
+        <p class="muted">Pick a condition, enter your values, and a trained machine-learning model gives a YES / NO screening result. This is a risk signal, not a diagnosis.</p>
+        <div id="disease-list" class="disease-list"></div>
+      </div>
+
+      <div class="card" id="form-card" hidden>
+        <h2 id="form-title"></h2>
+        <form id="predict-form" novalidate>
+          <div id="fields" class="fields"></div>
+          <p id="predict-error" class="error" role="alert" hidden></p>
+          <button type="submit" class="btn primary" id="predict-btn">Check now</button>
+        </form>
+        <div id="result" class="result" hidden></div>
+      </div>
+    </section>
+
+    <!-- 3. AI AGENT -->
+    <section id="tab-report" class="panel" role="tabpanel">
+      <div class="card">
+        <h2>AI health report</h2>
+        <p class="muted">Describe your symptoms and history. The AI agent reads it together with any screening results below and writes a structured report with urgency, next steps and which specialist to see.</p>
+        <form id="agent-form">
+          <label for="symptoms">Medical history &amp; symptoms *</label>
+          <textarea id="symptoms" rows="5" maxlength="4000" required
+            placeholder="e.g. Male, 52. Fever for 3 days, headache, joint pain. I have diabetes for 8 years."></textarea>
+
+          <label for="extra">Additional information <span class="muted">(optional)</span></label>
+          <textarea id="extra" rows="3" maxlength="4000"
+            placeholder="Medicines you take, allergies, recent test results, lifestyle…"></textarea>
+
+          <div id="attach-box" class="attach" hidden>
+            <strong>Include screening results</strong>
+            <div id="attach-list"></div>
+          </div>
+
+          <p id="agent-error" class="error" role="alert" hidden></p>
+          <button type="submit" class="btn primary" id="agent-btn">Generate report</button>
+        </form>
+      </div>
+      <div id="report-card" class="card" hidden></div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Medical disclaimer:</strong> This app provides general health information only. It is not a substitute for professional medical advice, diagnosis or treatment. Always consult a qualified doctor.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

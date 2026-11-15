@@ -1,0 +1,9 @@
+fastmcp
+fastapi
+uvicorn
+langchain-groq
+langchain-core
+python-dotenv
+pandas
+joblib
+scikit-learn==1.9.1
